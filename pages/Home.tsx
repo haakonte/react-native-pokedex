@@ -46,7 +46,7 @@ export default function Home({ navigation }) {
             handleLoadMore();
           }
         }}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.2}
         initialNumToRender={20}
       />
     </View>
