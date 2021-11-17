@@ -30,11 +30,21 @@ export default function Pokeinfo({ route }) {
               uri: pokedata.img
             }}>
         </Image>
-        <Text style= {styles.text}>
-              PokeID:         {pokedata.id} {"\n"}
-              Name:           {pokedata.name} {"\n"}
-              Type:             {pokedata.type} {"\n"}
-              Weakness:   {pokedata.weaknesses}</Text>
+        <View style={styles.wrapper}>
+          <Text style= {styles.text}>
+            PokeID:{"\n"}
+            Name:{"\n"}
+            Type:{"\n"}
+            Weaknesses:
+          </Text>
+          <Text style= {styles.textdata}> 
+            {pokedata.id} {"\n"}
+            {pokedata.name} {"\n"}
+            {pokedata.type.join(", ")} {"\n"}
+            {pokedata.weaknesses.join(", ")}
+          </Text>
+        </View>
+        
       </View>
     );
   } else {
@@ -55,10 +65,26 @@ const styles = StyleSheet.create({
   picture: {
     width: 150,
     height: 150,
-    margin: 12,
+    margin: 10,
+  },
+
+  wrapper: {
+    maxWidth: "70%",
+    flexWrap: "wrap",
+    flexDirection: "row",
   },
 
   text: {
+    flex: 1,
+    position: 'relative',
+    right: -20,
+    color: 'white',
+    fontSize: 16,
+    lineHeight: 24,
+  },
+
+  textdata: {
+    flex: 1,
     color: 'white',
     fontSize: 16,
     lineHeight: 24,
