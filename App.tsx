@@ -5,14 +5,15 @@ import Home from './pages/Home';
 import Pokeinfo from './pages/Pokeinfo';
 
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Pokedex' }}/>
-        <Stack.Screen name="Pokeinfo" component={Pokeinfo} options={{ title: 'Pokeinfo' }}/>
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Pokedex', headerTitleStyle: { color: '#282c34', fontSize: 25}, headerStyle: {backgroundColor: '#ED6C02'}}}/>
+        <Stack.Screen name="Pokeinfo" component={Pokeinfo} options={{ title: 'Pokeinfo', headerTitleStyle: { color: '#282c34', fontSize: 25}, headerStyle: {backgroundColor: '#ED6C02'}}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
