@@ -76,11 +76,13 @@ const styles = StyleSheet.create({
   wrapper: {
     borderWidth: 2,
     borderColor: '#ED6C02',
+    alignContent: 'center',
     margin: 5,
     padding: 5,
   },
 
   text: {
+    justifyContent: 'center',
     textAlign: 'center',
     fontSize: 12,
     color: 'white',
