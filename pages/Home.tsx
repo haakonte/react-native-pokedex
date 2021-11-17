@@ -41,7 +41,7 @@ export default function Home({ navigation }) {
               {item.id}. {item.name}
             </Text>
             <Text style={styles.text}>
-              {item.type}
+              {item.type.join(" ")}
             </Text>
           </TouchableOpacity>
         )}
