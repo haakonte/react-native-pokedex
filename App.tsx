@@ -12,8 +12,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Pokedex', headerTitleStyle: { color: '#282c34', fontSize: 25}, headerStyle: {backgroundColor: '#ED6C02'}}}/>
-        <Stack.Screen name="Pokeinfo" component={Pokeinfo} options={{ title: 'Pokeinfo', headerTitleStyle: { color: '#282c34', fontSize: 25}, headerStyle: {backgroundColor: '#ED6C02'}}}/>
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Pokedex', headerTitleStyle: { color: '#282c34', fontSize: 25 }, headerTitleAlign: 'center', headerStyle: {backgroundColor: '#ED6C02',}}}/>
+        <Stack.Screen name="Pokeinfo" component={Pokeinfo} options={{ headerTintColor: '#282c34', headerTitleAlign: 'center',
+          title: 'Pokeinfo', headerTitleStyle: { color: '#282c34', fontSize: 25}, headerStyle: {backgroundColor: '#ED6C02' }}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
