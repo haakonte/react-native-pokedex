@@ -31,22 +31,23 @@ const actions = [
   ];
 
 const styles = StyleSheet.create({
-    wrapper: {
-        bottom: 10,
+    button: {
+        bottom: 5,
         top: 10,
         position: "absolute"
+        
     }
 })
 
 export const Filter = () => {
     
     return (
-        <View style={styles.wrapper}>
-            <Text style={styles.wrapper}>Floating Action example</Text>
+        <View style={styles.button}>
             <FloatingAction
             actions={actions}
+            onPressMain={() => console.log("sheesh")}
             onPressItem={name => {
-            console.log(`selected button: ${name}`);
+                console.log(`selected button: ${name}`);
             }}
             />
         </View>

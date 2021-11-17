@@ -15,7 +15,7 @@ import { fetchSinglePokemon } from "../services/pokemon_api";
 //   weaknesses: [String];
 // }
 
-export default function Pokeinfo({ route }) {
+export default function Pokeinfo({ route }: any) {
   const { pokemon } = route.params;
   const [pokedata, setData]: [any, Dispatch<any>] = useState(null);
   useEffect(() => {
