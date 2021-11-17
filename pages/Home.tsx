@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Image, Text, View, ScrollView, FlatList } from "react-native";
+import { Button, Image, Text, View, FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { withSafeAreaInsets } from "react-native-safe-area-context";
 import { fetchPokemon } from "../services/pokemon_api";
-import Pokeinfo from "./Pokeinfo";
+
+
 
 export default function Home({ navigation }) {
   const [data, setData]: [any, React.Dispatch<React.SetStateAction<any>>] =
@@ -24,22 +26,24 @@ export default function Home({ navigation }) {
     return <></>;
   }
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Home page boiler plate</Text>
-      <FlatList
+    <View style={styles.home}>
+      <FlatList numColumns={3}
         data={data}
         renderItem={({ item }: any) => (
-          <View key={item.id}>
-            <Text>
+          <TouchableOpacity key={item.id} style={styles.wrapper} onPress={() => {
+            navigation.navigate("Pokeinfo", { pokemon: item._id });
+          }}>
+            <Image style={styles.picture} source={{
+              uri: item.img
+            }}>
+            </Image>
+            <Text style={styles.text}>
               {item.id}. {item.name}
             </Text>
-            <Button
-              title="Go to Details"
-              onPress={() => {
-                navigation.navigate("Pokeinfo", { pokemon: item._id });
-              }}
-            />
-          </View>
+            <Text style={styles.text}>
+              {item.type}
+            </Text>
+          </TouchableOpacity>
         )}
         onEndReached={() => {
           if (offset < 151 / 20) {
@@ -52,3 +56,34 @@ export default function Home({ navigation }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+
+  home: {
+    backgroundColor: '#282c34',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center", 
+    justifyContent: "space-between",
+    flex: 1, 
+  },
+
+  picture: {
+    width: 90,
+    height: 90,
+  },
+
+  wrapper: {
+    borderWidth: 2,
+    borderColor: '#ED6C02',
+    margin: 5,
+    padding: 5,
+  },
+
+  text: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: 'white',
+  }
+
+});
