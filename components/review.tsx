@@ -38,12 +38,13 @@ export default function Review({ id }: { id: string }) {
             enableHalfStar={false}
           />
           <TextInput
-            placeholder="comment"
+            placeholder="Comment..."
             multiline
             numberOfLines={3}
             style={styles.textInput}
             value={text}
             onChangeText={onChangeText}
+            placeholderTextColor="'rgba(255, 255, 255, 0.5)'"
           />
           <View style={styles.btnContainer}>
             <Button title="Submit" onPress={handleSubmit} color="#ED6C02" />
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
     borderColor: "#ED6C02",
     borderBottomWidth: 1,
     marginBottom: 36,
+    color: "#fff",
   },
   btnContainer: {
     borderWidth: 1,
