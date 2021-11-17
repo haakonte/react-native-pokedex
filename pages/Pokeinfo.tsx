@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { fetchSinglePokemon } from "../services/pokemon_api";
 
 // interface pokemonInterface{
@@ -25,15 +25,32 @@ export default function Pokeinfo({ route }) {
   }, []);
   if (pokedata) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Pokeinfo page boilerplate</Text>
-        <Text>PokeID: {JSON.stringify(pokedata.id)}</Text>
-        <Text>Name: {JSON.stringify(pokedata.name)}</Text>
-        <Text>Type: {JSON.stringify(pokedata.type)}</Text>
-        <Text>Weakness: {JSON.stringify(pokedata.weaknesses)}</Text>
+      <View style={styles.info}>
+        <Image style={styles.picture} source={{
+              uri: pokedata.img
+            }}>
+        </Image>
+        <Text>PokeID: {pokedata.id}</Text>
+        <Text>Name: {pokedata.name}</Text>
+        <Text>Type: {pokedata.type}</Text>
+        <Text>Weakness: {pokedata.weaknesses}</Text>
       </View>
     );
   } else {
     return <></>;
   }
 }
+
+const styles = StyleSheet.create({
+
+  info: {
+    flex: 1, 
+    alignItems: "center", 
+    justifyContent: "center",
+  },
+
+  picture: {
+    width: 150,
+    height: 150,
+  },
+})
