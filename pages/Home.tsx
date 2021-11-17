@@ -12,8 +12,9 @@ import {
   TextInput,
 } from "react-native";
 import { withSafeAreaInsets } from "react-native-safe-area-context";
+import { Filter } from "../components/Filter";
 
-export default function Home({ navigation }) {
+export default function Home({ navigation }: any) {
   const [data, setData]: [any, React.Dispatch<React.SetStateAction<any>>] =
     useState([]);
   const [offset, setOffset] = useState(1);
@@ -93,6 +94,7 @@ export default function Home({ navigation }) {
         onEndReachedThreshold={0.2}
         initialNumToRender={20}
       />
+      <Filter />
     </View>
   );
 }
