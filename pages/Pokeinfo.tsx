@@ -6,6 +6,7 @@ import React, {
   useState,
 } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
+import Review from "../components/review";
 import { fetchSinglePokemon } from "../services/pokemon_api";
 
 // interface pokemonInterface{
@@ -26,14 +27,17 @@ export default function Pokeinfo({ route }: any) {
   if (pokedata) {
     return (
       <View style={styles.info}>
-        <Image style={styles.picture} source={{
-              uri: pokedata.img
-            }}>
-        </Image>
+        <Image
+          style={styles.picture}
+          source={{
+            uri: pokedata.img,
+          }}
+        ></Image>
         <Text>PokeID: {pokedata.id}</Text>
         <Text>Name: {pokedata.name}</Text>
         <Text>Type: {pokedata.type}</Text>
         <Text>Weakness: {pokedata.weaknesses}</Text>
+        <Review id={pokemon} />
       </View>
     );
   } else {
@@ -42,10 +46,9 @@ export default function Pokeinfo({ route }: any) {
 }
 
 const styles = StyleSheet.create({
-
   info: {
-    flex: 1, 
-    alignItems: "center", 
+    flex: 1,
+    alignItems: "center",
     justifyContent: "center",
   },
 
@@ -53,4 +56,4 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
   },
-})
+});
