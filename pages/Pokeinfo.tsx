@@ -5,8 +5,9 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Review from "../components/review";
+import ReviewList from "../components/review-list";
 import { fetchSinglePokemon } from "../services/pokemon_api";
 
 // interface pokemonInterface{
@@ -19,14 +20,19 @@ import { fetchSinglePokemon } from "../services/pokemon_api";
 export default function Pokeinfo({ route }: any) {
   const { pokemon } = route.params;
   const [pokedata, setData]: [any, Dispatch<any>] = useState(null);
+  const [refresh, doRefresh]: [boolean, Dispatch<SetStateAction<boolean>>] =
+    useState<boolean>(false);
   useEffect(() => {
     fetchSinglePokemon(pokemon).then((response) => {
       setData(response.data.findSinglePokemon);
     });
-  }, []);
+  }, [refresh]);
   if (pokedata) {
     return (
-      <View style={styles.info}>
+      <ScrollView
+        style={styles.info}
+        contentContainerStyle={{ alignItems: "center" }}
+      >
         <Image
           style={styles.picture}
           source={{
@@ -47,8 +53,9 @@ export default function Pokeinfo({ route }: any) {
             {pokedata.weaknesses.join(", ")}
           </Text>
         </View>
-        <Review id={pokemon} />
-      </View>
+        <Review id={pokemon} refresh={refresh} doRefresh={doRefresh} />
+        <ReviewList id={pokemon} refresh={refresh} />
+      </ScrollView>
     );
   } else {
     return <></>;
@@ -60,7 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#282c34",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     flex: 1,
   },
 

@@ -1,4 +1,4 @@
-import React, { Props, useState } from "react";
+import React, { Props, SetStateAction, useState } from "react";
 import {
   View,
   TextInput,
@@ -9,18 +9,31 @@ import {
   Keyboard,
   Button,
   Text,
+  useWindowDimensions,
 } from "react-native";
 import StarRating from "react-native-star-rating-widget";
 import { addReview } from "../services/pokemon_api";
 
-export default function Review({ id }: { id: string }) {
+export default function Review({
+  id,
+  refresh,
+  doRefresh,
+}: {
+  id: string;
+  refresh: boolean;
+  doRefresh: React.Dispatch<SetStateAction<boolean>>;
+}) {
   const [rating, setRating] = useState(3);
   const [text, onChangeText] = useState("");
 
   const handleSubmit = async () => {
     //Push changes
     //TODO: fikse noe navnegreier
-    addReview(id, rating, text, "anon").then((res) => console.log(res));
+    addReview(id, rating, text, "anon").then(() => {
+      doRefresh(!refresh);
+      onChangeText("");
+      setRating(3);
+    });
 
     //TODO: reloade frontend
   };
