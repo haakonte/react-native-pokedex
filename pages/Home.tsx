@@ -66,6 +66,8 @@ export default function Home({ navigation }) {
       />
       <FlatList
         numColumns={3}
+        
+        indicatorStyle='white'
         data={data}
         renderItem={({ item }: any) => (
           <TouchableOpacity
