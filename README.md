@@ -25,6 +25,9 @@ Prosjektets relevante kode er listet nedenfor i en oversiktlig struktur.
 ## React Native frontend
 
 ### **Pages**
+I likhet med prosjekt 3 har vi en Home page komponent, som bruker service-metoder for å hente
+ned aktuelle data som skal displayes. Den fungerer likt som Home page komponenten i prosjekt 3, 
+men bruker da React-native ekvivalente komponenter som View for å sette overordnet style, hvilket fungerer omtrent som en <div> i vanlig React, og FlatList som da er ansvarlig for å rendere selve dataene. Innenfor FlatList blir hvert element renderet som et TouchableOpacity element, som vil si at det kan interageres med fra touch.
 
 ### **Components**
 
