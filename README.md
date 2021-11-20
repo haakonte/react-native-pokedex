@@ -1,6 +1,6 @@
 # Dokumentasjon
 
-I denne oppgaven har vi videreutviklet vårt prosjekt 3 og satt opp en React Native client. Prosjektet er laget med hensyn til å følge de samme kravene fra prosjekt 3. Repo til prosjekt 3 er [her](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-26/webdev-project-3) hvis en ønsker å se på grunnlaget til dette prosjektet. Det er ikke nødvendig å lese og forstå prosjekt 3 for å gå gjennom prosjekt 4 da denne dokumentasjonen er uavhengig av tidligere prosjekt. 
+I denne oppgaven har vi videreutviklet vårt prosjekt 3 og satt opp en React Native client. Prosjektet er laget med hensyn til å følge de samme kravene fra prosjekt 3. Repo til prosjekt 3 er [her](https://gitlab.stud.idi.ntnu.no/it2810-h21/team-26/webdev-project-3) hvis en ønsker å se på grunnlaget til dette prosjektet. Det er ikke nødvendig å lese og forstå prosjekt 3 for å gå gjennom prosjekt 4 da denne dokumentasjonen er uavhengig av tidligere prosjekt. Dette ikonet :construction: i dokumentasjonen viser en oppgradering/forbedring fra prosjekt 3, enten som følge av tilbakemelding eller fordi vi mener det er en hensiktsmessig forbedring. 
 
 Vår prosjekt er en PokeDex der du som bruker kan scrolle og lese om pokemon. Vi har en frontend med filter, sortering og søkefunksjonaliteter og en gjenbrukt backend fra tidligere prosjekt. I tillegg kan du lagre brukergenererte data. Nå skal vi gå gjennom vår prosjektstruktur, frontendkode, Backend løsningen, utviklingen generelt, forbedringer fra prosjekt 3 og andre kravspesifikasjoner. 
 
