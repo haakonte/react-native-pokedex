@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { connect } from "react-redux";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { fetchSinglePokemon } from "../services/pokemon_api";
 
@@ -15,7 +16,13 @@ import { fetchSinglePokemon } from "../services/pokemon_api";
 //   weaknesses: [String];
 // }
 
+const mapStateToProps = (state: { name: any; }) => {
+  const { name } = state 
+  return { name}
+};
+
 export default function Pokeinfo({ route }) {
+  connect(mapStateToProps)(Pokeinfo);
   const { pokemon } = route.params;
   const [pokedata, setData]: [any, Dispatch<any>] = useState(null);
   useEffect(() => {

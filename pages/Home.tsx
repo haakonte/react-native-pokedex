@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchPokemon, searchForPokemon } from "../services/pokemon_api";
 import Pokeinfo from "./Pokeinfo";
+import { connect } from 'react-redux';
 import {
   Button,
   Image,
@@ -12,6 +13,13 @@ import {
   TextInput,
 } from "react-native";
 import { withSafeAreaInsets } from "react-native-safe-area-context";
+import Name from "../components/name";
+
+const mapStateToProps = (state: { name: any; }) => {
+  const { name } = state
+  return { name}
+};
+
 
 export default function Home({ navigation }) {
   const [data, setData]: [any, React.Dispatch<React.SetStateAction<any>>] =
@@ -25,6 +33,7 @@ export default function Home({ navigation }) {
       setData(response.data.searchForPokemon);
     });
   };
+  connect(mapStateToProps)(Home);
 
   const handleLoadMore = async () => {
     await setOffset(offset + 1);
@@ -49,6 +58,7 @@ export default function Home({ navigation }) {
   }
   return (
     <View style={styles.home}>
+      <Name/>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}

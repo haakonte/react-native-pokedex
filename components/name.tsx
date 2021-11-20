@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeName } from "./reducer/nameReducer";
-import Dialog, { DialogContent } from 'react-native-popup-dialog';
-import { Button, View } from 'react-native'
-
+import { changeName } from "../reducer/nameReducer"
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import Dialog from "react-native-dialog"
 
 const Name = (props: any) => {
   const dispatch = useDispatch();
@@ -31,49 +30,41 @@ const Name = (props: any) => {
   };
 
 
+
   return (
     <View>
-        <Dialog visible={open.state.visible}>
+    <Dialog.Container visible={open}>
+      <Dialog.Title style={styles.title}>Hva heter du?</Dialog.Title>
+      <Dialog.Description>
+        Vi vil bruke navnet ditt i forbindelse med reviews du legger igjen.
+        Skriv inn navnet ditt for å fortsette.
+      </Dialog.Description>
+      <Dialog.Input style={styles.input} value={name} placeholder="Skriv her..." onChangeText={setName}>
+      </Dialog.Input>
+      <Dialog.Button style={styles.button} label="Lagre" onPress={handleClose}/>
+    </Dialog.Container>
+  </View>
 
-        </Dialog>
-    </View>
-    /** 
-    <div>
-      <Dialog open={open} onClose={handleClose} >
-        <DialogTitle>Hva heter du?</DialogTitle>
-        <DialogContent >
-          <DialogContentText>
-            Vi vil bruke navnet ditt i forbindelse med reviews du legger igjen.
-            Skriv inn navnet ditt for å fortsette.
-          </DialogContentText>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleClose();
-            }}
-          >
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name-input"
-              label="Navn"
-              type="name"
-              fullWidth
-              variant="standard"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              color="warning"
-            />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="warning">Lagre</Button>
-        </DialogActions>
-      </Dialog>
-    </div>*/
   );
 };
 
 export default Name;
+
+const styles = StyleSheet.create({
+    input: {
+        margin: 10,
+        textAlign: 'center',
+        fontSize: 18,
+    },
+
+    title: {
+        textAlign: 'center',
+    },
+
+    button: {
+        fontSize: 18,
+        color: "#ED6C02",
+
+    }
+
+})
