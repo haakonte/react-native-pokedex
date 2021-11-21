@@ -8,6 +8,7 @@ import React, {
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import Review from "../components/review";
 import ReviewList from "../components/review-list";
+import { connect } from "react-redux";
 import { fetchSinglePokemon } from "../services/pokemon_api";
 
 // interface pokemonInterface{
@@ -17,7 +18,13 @@ import { fetchSinglePokemon } from "../services/pokemon_api";
 //   weaknesses: [String];
 // }
 
-export default function Pokeinfo({ route }: any) {
+const mapStateToProps = (state: { name: any }) => {
+  const { name } = state;
+  return { name };
+};
+
+export default function Pokeinfo({ route }: { route: any }) {
+  connect(mapStateToProps)(Pokeinfo);
   const { pokemon } = route.params;
   const [pokedata, setData]: [any, Dispatch<any>] = useState(null);
   const [refresh, doRefresh]: [boolean, Dispatch<SetStateAction<boolean>>] =
