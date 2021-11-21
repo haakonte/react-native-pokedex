@@ -14,6 +14,7 @@ import Name from "../components/name";
 import Filter from "../components/Filter";
 import Search from "../components/search";
 import Pokelist from "../components/pokelist";
+import { placeholder } from "@babel/types";
 
 export default function Home({ navigation }: any) {
   const [data, setData]: [any, React.Dispatch<React.SetStateAction<any>>] =
@@ -26,7 +27,7 @@ export default function Home({ navigation }: any) {
 
   const sortSwitch = async () => {
     setOffset(1);
-    setFilterValue();
+    setFilterValue([]);
     onChangeText("");
     setSorting(value => !value);
   }
