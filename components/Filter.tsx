@@ -44,6 +44,8 @@ export default function Filter({
         open={open}
         value={value}
         items={items}
+        placeholder="Select type to filter on"
+        mode="BADGE"
         setOpen={setOpen}
         setValue={setValue}
         setItems={setItems}
