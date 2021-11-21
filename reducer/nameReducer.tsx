@@ -1,9 +1,4 @@
-import { PayloadAction, Reducer } from "@reduxjs/toolkit";
-
-export const nameReducer: Reducer<any, PayloadAction> = (
-  state: any = { name: "" },
-  action: PayloadAction
-) => {
+export const nameReducer = (state: any = { name: "" }, action: any) => {
   switch (action.type) {
     case "CHANGENAME":
       return { name: action.payload };
