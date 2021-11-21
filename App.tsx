@@ -1,21 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './pages/Home';
+import Pokeinfo from './pages/Pokeinfo';
+
+
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Pokedex', headerTitleStyle: { color: '#282c34', fontSize: 25 }, headerTitleAlign: 'center', headerStyle: {backgroundColor: '#ED6C02',}}}/>
+        <Stack.Screen name="Pokeinfo" component={Pokeinfo} options={{ headerTintColor: '#282c34', headerTitleAlign: 'center',
+          title: 'Pokeinfo', headerTitleStyle: { color: '#282c34', fontSize: 25}, headerStyle: {backgroundColor: '#ED6C02' }}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
