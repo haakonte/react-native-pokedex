@@ -49,6 +49,14 @@ export default function Filter({
         setItems={setItems}
         multiple={true}
         onChangeValue={(value) => onChangeValue(value)}
+        props={  
+          {
+            accessibilityRole: "button"
+          }
+        }
+        disabled={
+          open ? false : true
+        }
       />
     </View>
   );
