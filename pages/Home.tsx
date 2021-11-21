@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { fetchPokemon, searchForPokemon } from "../services/pokemon_api";
+import {
+  fetchPokemon,
+  filterOnType,
+  searchForPokemon,
+} from "../services/pokemon_api";
 import Pokeinfo from "./Pokeinfo";
 import {
   Button,
@@ -12,12 +16,14 @@ import {
   TextInput,
 } from "react-native";
 import { withSafeAreaInsets } from "react-native-safe-area-context";
+import Filter from "../components/Filter";
 
-export default function Home({ navigation }) {
+export default function Home({ navigation }: any) {
   const [data, setData]: [any, React.Dispatch<React.SetStateAction<any>>] =
     useState([]);
   const [offset, setOffset] = useState(1);
   const [text, onChangeText] = useState("");
+  const [filterValue, setFilterValue]: [any, any] = useState(null);
 
   const handleSearch = async () => {
     setOffset(1);
@@ -26,11 +32,28 @@ export default function Home({ navigation }) {
     });
   };
 
+  const handleFilter = async (value: any) => {
+    setOffset(1);
+    if (value.length > 0) {
+      filterOnType(value, 20, 0, false).then((response) => {
+        setData(response.data.findOnType);
+      });
+    } else {
+      fetchPokemon(false, 20, 0).then((response) => {
+        setData(response.data.allPokemon);
+      });
+    }
+  };
+
   const handleLoadMore = async () => {
     await setOffset(offset + 1);
     if (text != "") {
       searchForPokemon(text, 20, 20 * offset, false).then((response) => {
         setData([...data, ...response.data.searchForPokemon]);
+      });
+    } else if (filterValue && filterValue.length > 0) {
+      filterOnType(filterValue, 20, 20 * offset, false).then((response) => {
+        setData([...data, ...response.data.findOnType]);
       });
     } else {
       fetchPokemon(false, 20, 20 * offset).then((response) => {
@@ -64,6 +87,11 @@ export default function Home({ navigation }) {
         }}
         returnKeyType="search"
       />
+      <Filter
+        value={filterValue}
+        setValue={setFilterValue}
+        onChangeValue={handleFilter}
+      />
       <FlatList
         numColumns={3}
         
@@ -86,9 +114,7 @@ export default function Home({ navigation }) {
             <Text style={styles.text}>
               {item.id}. {item.name}
             </Text>
-            <Text style={styles.text}>
-              {item.type.join(" ")}
-            </Text>
+            <Text style={styles.text}>{item.type.join(" ")}</Text>
           </TouchableOpacity>
         )}
         onEndReached={() => {

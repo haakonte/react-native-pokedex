@@ -196,6 +196,7 @@ const ADD_REVIEW = () =>
 const FIND_REVIEWS_OF_POKEMON = () =>
   `query Query($id: ID!) {
     findReviewsOfPokemon(id: $id) {
+      _id
       name
       score
       comment
