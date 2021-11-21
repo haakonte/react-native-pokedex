@@ -47,6 +47,8 @@ const Name = (props: any) => {
           style={styles.button}
           label="Lagre"
           onPress={handleClose}
+          accessibilityRole="button"
+          accessibilityLabel="Lagring av navn"
         />
       </Dialog.Container>
     </View>

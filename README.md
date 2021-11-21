@@ -37,7 +37,15 @@ Vi har en komponent som heter Name, som tar i bruk react redux for å holde styr
 man oppretter som bruker.
 
 ### **Redux**
-Vi har en 
+
+### **Accessibility**
+For å teste web accessibility har vi brukt AccessibilityEngine fra rammeverket 
+react-native-accessibility-engine. På denne måten har vi skrevet enkle tester
+for hver komponent der det hovedsakelig er samme oppskrift for hver komponent, 
+nemlig at man skriver en kort test der det forventes at Accessibility engine ikke
+kaster en feil. Web accessibility kan da implisitt sjekkes ved å kjøre npm test
+og se at alle testene kjører feilfritt, hvilket i teorien skal indikere god
+WCAG.
 
 ## Utvikling
 
