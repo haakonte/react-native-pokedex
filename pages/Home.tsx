@@ -4,18 +4,13 @@ import {
   filterOnType,
   searchForPokemon,
 } from "../services/pokemon_api";
-import Pokeinfo from "./Pokeinfo";
 import {
-  Image,
-  Text,
   View,
-  FlatList,
   StyleSheet,
-  TouchableOpacity,
-  TextInput,
+  Switch,
+  Text,
 } from "react-native";
 import Name from "../components/name";
-import { withSafeAreaInsets } from "react-native-safe-area-context";
 import Filter from "../components/Filter";
 import Search from "../components/search";
 import Pokelist from "../components/pokelist";
@@ -26,10 +21,19 @@ export default function Home({ navigation }: any) {
   const [offset, setOffset] = useState(1);
   const [text, onChangeText] = useState("");
   const [filterValue, setFilterValue]: [any, any] = useState(null);
+  const [sorting, setSorting] = useState(false);
+
+
+  const sortSwitch = async () => {
+    setOffset(1);
+    setFilterValue();
+    onChangeText("");
+    setSorting(value => !value);
+  }
 
   const handleSearch = async () => {
     setOffset(1);
-    searchForPokemon(text, 20, 0, false).then((response) => {
+    searchForPokemon(text, 20, 0, sorting).then((response) => {
       setData(response.data.searchForPokemon);
     });
   };
@@ -37,11 +41,11 @@ export default function Home({ navigation }: any) {
   const handleFilter = async (value: any) => {
     setOffset(1);
     if (value.length > 0) {
-      filterOnType(value, 20, 0, false).then((response) => {
+      filterOnType(value, 20, 0, sorting).then((response) => {
         setData(response.data.findOnType);
       });
     } else {
-      fetchPokemon(false, 20, 0).then((response) => {
+      fetchPokemon(sorting, 20, 0).then((response) => {
         setData(response.data.allPokemon);
       });
     }
@@ -50,26 +54,26 @@ export default function Home({ navigation }: any) {
   const handleLoadMore = async () => {
     await setOffset(offset + 1);
     if (text != "") {
-      searchForPokemon(text, 20, 20 * offset, false).then((response) => {
+      searchForPokemon(text, 20, 20 * offset, sorting).then((response) => {
         setData([...data, ...response.data.searchForPokemon]);
       });
     } else if (filterValue && filterValue.length > 0) {
-      filterOnType(filterValue, 20, 20 * offset, false).then((response) => {
+      filterOnType(filterValue, 20, 20 * offset, sorting).then((response) => {
         setData([...data, ...response.data.findOnType]);
       });
     } else {
-      fetchPokemon(false, 20, 20 * offset).then((response) => {
+      fetchPokemon(sorting, 20, 20 * offset).then((response) => {
         setData([...data, ...response.data.allPokemon]);
       });
     }
   };
 
   useEffect(() => {
-    fetchPokemon(false, 20, 0).then((response) => {
+    fetchPokemon(sorting, 20, 0).then((response) => {
       setData(response.data.allPokemon);
     });
-  }, []);
-  if (data == []) {
+  }, [sorting]);
+  if (data == [sorting]) {
     return <></>;
   }
   return (
@@ -85,6 +89,16 @@ export default function Home({ navigation }: any) {
         setValue={setFilterValue}
         onChangeValue={handleFilter}
       />
+      <View style={styles.sort}>
+      <Text style={{color: 'white'}}>Chronological</Text>
+      <Switch
+        trackColor={{ false: '#ED6C02', true: '#ED6C02'}}
+        thumbColor={ sorting ?  'white' :'white'}
+        onValueChange={sortSwitch}
+        value={sorting}
+      />
+      <Text style={{color: 'white'}}>Alphabetical</Text>
+      </View>
       <Pokelist
         data={data}
         offset={offset}
@@ -104,4 +118,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flex: 1,
   },
+  sort: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: "space-between",
+  }
 });
