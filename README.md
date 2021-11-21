@@ -30,8 +30,14 @@ ned aktuelle data som skal displayes. Den fungerer likt som Home page komponente
 men bruker da React-native ekvivalente komponenter som View for å sette overordnet style, hvilket fungerer omtrent som en <div> i vanlig React, og FlatList som da er ansvarlig for å rendere selve dataene. Innenfor FlatList blir hvert element renderet som et TouchableOpacity element, som vil si at det kan interageres med fra touch.
 
 ### **Components**
+Man kan argumentere for at hoved-komponentene våre ligger i pages mappen, fordi de er de
+mest sentrale for react-native appen. De tar i bruk mange tredjeparts-komponenter, som kreves
+for å "oversette" prosjekt 3 til React-native, som  tidligere nevnt i avsnittet om Pages. 
+Vi har en komponent som heter Name, som tar i bruk react redux for å holde styr på navnet
+man oppretter som bruker.
 
 ### **Redux**
+Vi har en 
 
 ## Utvikling
 
