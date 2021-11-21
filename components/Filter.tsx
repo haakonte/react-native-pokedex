@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
   container: {
     zIndex: 1,
     minHeight: 300,
-    marginBottom: -250
-  }
+    marginBottom: -250,
+  },
 });
 
 export default function Filter({
@@ -49,14 +49,9 @@ export default function Filter({
         setItems={setItems}
         multiple={true}
         onChangeValue={(value) => onChangeValue(value)}
-        props={  
-          {
-            accessibilityRole: "button"
-          }
-        }
-        disabled={
-          open ? false : true
-        }
+        props={{
+          accessibilityRole: "button",
+        }}
       />
     </View>
   );
