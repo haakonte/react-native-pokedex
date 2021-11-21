@@ -58,8 +58,16 @@ ned aktuelle data som skal displayes. Den fungerer likt som Home page komponente
 men bruker da React-native ekvivalente komponenter som View for å sette overordnet style, hvilket fungerer omtrent som en <div> i vanlig React, og FlatList som da er ansvarlig for å rendere selve dataene. Innenfor FlatList blir hvert element renderet som et TouchableOpacity element, som vil si at det kan interageres med fra touch.
 
 ### **Redux**
-
 Vi bruker Redux til å lagre globale dataen navnet til brukeren. I _name.tsx_ som ble brukt ved å gi tilbakemeldinger om Pokemon.
+
+### **Accessibility**
+For å teste web accessibility har vi brukt AccessibilityEngine fra rammeverket 
+react-native-accessibility-engine. På denne måten har vi skrevet enkle tester
+for hver komponent der det hovedsakelig er samme oppskrift for hver komponent, 
+nemlig at man skriver en kort test der det forventes at Accessibility engine ikke
+kaster en feil. Web accessibility kan da implisitt sjekkes ved å kjøre npm test
+og se at alle testene kjører feilfritt, hvilket i teorien skal indikere god
+WCAG.
 
 ### **Services**
 
