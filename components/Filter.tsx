@@ -5,7 +5,9 @@ import DropDownPicker from "react-native-dropdown-picker";
 const styles = StyleSheet.create({
   container: {
     zIndex: 1,
-  },
+    minHeight: 300,
+    marginBottom: -250
+  }
 });
 
 export default function Filter({
@@ -37,7 +39,7 @@ export default function Filter({
   ]);
 
   return (
-    <View style={styles.container}>
+    <View style={open ? styles.container : {}}>
       <DropDownPicker
         open={open}
         value={value}
