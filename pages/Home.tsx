@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { fetchPokemon, searchForPokemon } from "../services/pokemon_api";
+import {
+  fetchPokemon,
+  filterOnType,
+  searchForPokemon,
+} from "../services/pokemon_api";
+import Pokeinfo from "./Pokeinfo";
 import {
   Image,
   Text,
@@ -9,14 +14,16 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { Filter } from "../components/Filter";
 import Name from "../components/name";
+import { withSafeAreaInsets } from "react-native-safe-area-context";
+import Filter from "../components/Filter";
 
 export default function Home({ navigation }: any) {
   const [data, setData]: [any, React.Dispatch<React.SetStateAction<any>>] =
     useState([]);
   const [offset, setOffset] = useState(1);
   const [text, onChangeText] = useState("");
+  const [filterValue, setFilterValue]: [any, any] = useState(null);
 
   const handleSearch = async () => {
     setOffset(1);
@@ -25,11 +32,28 @@ export default function Home({ navigation }: any) {
     });
   };
 
+  const handleFilter = async (value: any) => {
+    setOffset(1);
+    if (value.length > 0) {
+      filterOnType(value, 20, 0, false).then((response) => {
+        setData(response.data.findOnType);
+      });
+    } else {
+      fetchPokemon(false, 20, 0).then((response) => {
+        setData(response.data.allPokemon);
+      });
+    }
+  };
+
   const handleLoadMore = async () => {
     await setOffset(offset + 1);
     if (text != "") {
       searchForPokemon(text, 20, 20 * offset, false).then((response) => {
         setData([...data, ...response.data.searchForPokemon]);
+      });
+    } else if (filterValue && filterValue.length > 0) {
+      filterOnType(filterValue, 20, 20 * offset, false).then((response) => {
+        setData([...data, ...response.data.findOnType]);
       });
     } else {
       fetchPokemon(false, 20, 20 * offset).then((response) => {
@@ -64,6 +88,11 @@ export default function Home({ navigation }: any) {
         }}
         returnKeyType="search"
       />
+      <Filter
+        value={filterValue}
+        setValue={setFilterValue}
+        onChangeValue={handleFilter}
+      />
       <FlatList
         numColumns={3}
         indicatorStyle="white"
@@ -96,7 +125,6 @@ export default function Home({ navigation }: any) {
         onEndReachedThreshold={0.2}
         initialNumToRender={20}
       />
-      <Filter />
     </View>
   );
 }
